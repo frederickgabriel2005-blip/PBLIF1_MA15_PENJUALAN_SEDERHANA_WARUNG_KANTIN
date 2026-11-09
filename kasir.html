@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasir - Aplikasi Penjualan Sederhana Warung/Kantin</title>
+  <link rel="stylesheet" href="kasir.css">
+</head>
+<body>
+
+  <!-- Header disesuaikan dengan CSS (.app-header) -->
+  <header class="app-header">
+    <div>
+      <h1 class="app-title">Aplikasi Penjualan Sederhana Warung/Kantin</h1>
+      <p class="app-subtitle">Sistem manajemen pencatatan toko & rumah makan</p>
+    </div>
+    <p class="app-user">Pengguna: <span class="muted">Admin / Kasir</span></p>
+  </header>
+
+  <!-- Navigasi Menu disesuaikan dengan CSS (.app-nav) -->
+  <nav class="app-nav">
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="kategori.html">Kategori</a></li>
+      <li><a href="produk.html">Produk</a></li>
+      <li><a href="kasir.html" class="active">Kasir</a></li>
+      <li><a href="transaksi.html">Transaksi</a></li>
+      <li><a href="laporan.html">Laporan</a></li>
+    </ul>
+    <a href="#" class="logout">Keluar</a>
+  </nav>
+
+  <form action="#" method="POST">
+    <!-- Kontainer utama disesuaikan dengan CSS (.container) -->
+    <main class="container">
+      <div class="page-head">
+        <h2 class="page-title">Kasir</h2>
+        <p class="muted">Catat penjualan tunai: pilih produk, periksa keranjang, lalu simpan pembayaran.</p>
+      </div>
+
+      <div class="info-row">
+        <div class="field">
+          <label for="tanggal">Tanggal penjualan</label>
+          <input type="date" id="tanggal" name="tanggal_penjualan" required>
+        </div>
+        <div class="field">
+          <label for="nomor">Nomor transaksi</label>
+          <input type="text" id="nomor" name="nomor_transaksi" value="PJ-004">
+        </div>
+        <p class="status">Status: <span class="muted">Belum disimpan • Penjualan baru</span></p>
+      </div>
+
+      <div class="columns">
+        <!-- Panel kiri: pilih produk -->
+        <section class="panel">
+          <h3 class="card-title">Pilih produk</h3>
+          <p class="hint">Tambah produk ke keranjang sesuai pesanan.</p>
+
+          <div class="search-row">
+            <div class="field grow">
+              <label for="cari">Cari produk</label>
+              <input type="text" id="cari" placeholder="Nama / kode produk">
+            </div>
+            <div class="field" style="width: 130px;">
+              <label for="kategori">Kategori</label>
+              <select id="kategori">
+                <option>Semua kategori</option>
+                <option>Makanan</option>
+                <option>Minuman</option>
+                <option>Camilan</option>
+              </select>
+            </div>
+            <button type="submit" class="btn primary">Cari</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th class="right">Harga</th>
+                  <th class="right">Stok</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>P-001 • Nasi goreng<br><span class="muted small">Makanan</span></td>
+                  <td class="right">15.000</td>
+                  <td class="right">20</td>
+                  <td><a href="#tambah" class="btn-aksi">Tambah</a></td>
+                </tr>
+                <tr>
+                  <td>P-002 • Mi goreng<br><span class="muted small">Makanan</span></td>
+                  <td class="right">12.000</td>
+                  <td class="right">15</td>
+                  <td><a href="#tambah" class="btn-aksi">Tambah</a></td>
+                </tr>
+                <tr>
+                  <td>P-003 • Es teh<br><span class="muted small">Minuman</span></td>
+                  <td class="right">4.000</td>
+                  <td class="right">50</td>
+                  <td><a href="#tambah" class="btn-aksi">Tambah</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Panel kanan: keranjang -->
+        <section class="panel">
+          <h3 class="card-title">Keranjang penjualan</h3>
+          <p class="hint">2 jenis produk • 4 item</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th class="right">Harga (Rp)</th>
+                  <th class="center">Jumlah</th>
+                  <th class="right">Subtotal (Rp)</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nasi goreng</td>
+                  <td class="right"><input type="number" class="input-tabel" value="15000"></td>
+                  <td class="center"><input type="number" class="input-qty" value="2" min="1"></td>
+                  <td class="right"><input type="number" class="input-tabel" value="30000"></td>
+                  <td><a href="#hapus" class="btn-aksi btn-hapus">Hapus</a></td>
+                </tr>
+                <tr>
+                  <td>Es teh</td>
+                  <td class="right"><input type="number" class="input-tabel" value="4000"></td>
+                  <td class="center"><input type="number" class="input-qty" value="2" min="1"></td>
+                  <td class="right"><input type="number" class="input-tabel" value="8000"></td>
+                  <td><a href="#hapus" class="btn-aksi btn-hapus">Hapus</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="total-box">
+            <span>Total belanja (Rp)</span>
+            <input type="number" class="input-tabel" value="38000" style="font-size: 14px; font-weight: 700; width: 120px;">
+          </div>
+
+          <div class="field block">
+            <label for="tunai">Nominal tunai diterima (Rp)</label>
+            <input type="number" id="tunai" placeholder="Contoh: 50000">
+          </div>
+          
+          <div class="field block">
+            <label for="kembalian">Kembalian (Rp)</label>
+            <input type="number" id="kembalian" placeholder="Isi manual kembalian">
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary" style="flex: 1;">Simpan Penjualan</button>
+            <button type="reset" class="btn" style="flex: 1;">Batalkan</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </form>
+</body>
+</html>
